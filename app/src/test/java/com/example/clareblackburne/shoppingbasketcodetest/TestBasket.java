@@ -1,5 +1,9 @@
 package com.example.clareblackburne.shoppingbasketcodetest;
 
+import com.example.clareblackburne.shoppingbasketcodetest.Items.BakedGoods;
+import com.example.clareblackburne.shoppingbasketcodetest.Items.CleaningProduct;
+import com.example.clareblackburne.shoppingbasketcodetest.Items.Dairy;
+
 import org.junit.Before;
 import org.junit.Test;
 

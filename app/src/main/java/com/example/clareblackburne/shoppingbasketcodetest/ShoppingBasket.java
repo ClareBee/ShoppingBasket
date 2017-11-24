@@ -1,5 +1,7 @@
 package com.example.clareblackburne.shoppingbasketcodetest;
 
+import com.example.clareblackburne.shoppingbasketcodetest.Items.Item;
+
 import java.util.ArrayList;
 
 /**
@@ -62,5 +64,5 @@ public class ShoppingBasket {
         return total;
     }
 
- 
+
 }

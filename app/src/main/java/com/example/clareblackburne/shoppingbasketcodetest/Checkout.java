@@ -1,5 +1,7 @@
 package com.example.clareblackburne.shoppingbasketcodetest;
 
+import com.example.clareblackburne.shoppingbasketcodetest.Items.Item;
+
 /**
  * Created by clareblackburne on 24/11/2017.
  */
@@ -14,6 +16,23 @@ public class Checkout {
         this.todaysDiscount = todaysDiscount;
     }
 
+    public double finalPrice (Customer customer, ShoppingBasket shoppingbasket){
+
+        double scannedPrice = this.applyDiscountIfEligible(shoppingbasket);
+        double finalPrice = scannedPrice;
+
+        if(customer.hasLoyaltyCard()){
+            finalPrice = 0.98 * scannedPrice;
+        }
+        else {
+            return scannedPrice;
+        }
+        return finalPrice;
+    }
+
+    public void chargeCustomer(Customer customer, ShoppingBasket shoppingBasket){
+        customer.setCash(customer.getCash() - this.finalPrice(customer, shoppingBasket));
+    }
 
     public double twoForOne(ShoppingBasket shoppingBasket){
 
@@ -51,22 +70,6 @@ public class Checkout {
         return updatedPrice;
     }
 
-    public double finalPrice (Customer customer, ShoppingBasket shoppingbasket){
 
-        double scannedPrice = this.applyDiscountIfEligible(shoppingbasket);
-        double finalPrice = scannedPrice;
-
-        if(customer.hasLoyaltyCard()){
-            finalPrice = 0.98 * scannedPrice;
-        }
-        else {
-            return scannedPrice;
-        }
-        return finalPrice;
-    }
-
-    public void chargeCustomer(Customer customer, ShoppingBasket shoppingBasket){
-        customer.setCash(customer.getCash() - this.finalPrice(customer, shoppingBasket));
-    }
 
 }

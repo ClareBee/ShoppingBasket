@@ -1,5 +1,10 @@
 package com.example.clareblackburne.shoppingbasketcodetest;
 
+import com.example.clareblackburne.shoppingbasketcodetest.Items.BakedGoods;
+import com.example.clareblackburne.shoppingbasketcodetest.Items.Dairy;
+import com.example.clareblackburne.shoppingbasketcodetest.Items.Drink;
+import com.example.clareblackburne.shoppingbasketcodetest.Items.FreshProduce;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -112,6 +117,21 @@ public class TestCheckout {
         assertEquals(289.22, customer1.getCash(), 0.1);
     }
 
+    @Test
+    public void testAllCriteriaApply(){
+        Drink beer = new Drink("Beer", 1, 22, true);
+        shoppingBasket.addItem(beer);
+        double result = checkout1.finalPrice(customer1, shoppingBasket);
+        assertEquals(9.70, result, 0.1);
+    }
+
+    @Test
+    public void testNoCriteriaApply(){
+        Drink orange = new Drink("orange juice", 3.50, 1, false);
+        shoppingBasket.addItem(orange);
+        double result = checkout1.finalPrice(customer2, shoppingBasket);
+        assertEquals(3.50, result, 0.1);
+    }
 
 
 
