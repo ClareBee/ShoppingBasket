@@ -94,6 +94,10 @@ public class TestBasket {
         assertEquals(4.0, shoppingBasket.calculateBaseCost(), 0.1);
     }
 
+    @Test
+    public void testCalCostWhenBasketEmpty(){
+        assertEquals(0, shoppingBasket.calculateBaseCost(), 0.1);
+    }
 
 
 }

@@ -24,5 +24,4 @@ public class Discount {
         return reduction;
     }
 
-
 }
