@@ -1,10 +1,12 @@
 package com.example.clareblackburne.shoppingbasketcodetest.Items;
 
+import com.example.clareblackburne.shoppingbasketcodetest.Offerable;
+
 /**
  * Created by clareblackburne on 24/11/2017.
  */
 
-public abstract class Item {
+public abstract class Item implements Offerable {
 
     private String name;
     private double price;

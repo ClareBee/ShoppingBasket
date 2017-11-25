@@ -1,6 +1,7 @@
 package com.example.clareblackburne.shoppingbasketcodetest;
 
 import com.example.clareblackburne.shoppingbasketcodetest.Items.BakedGoods;
+import com.example.clareblackburne.shoppingbasketcodetest.Items.CleaningProduct;
 import com.example.clareblackburne.shoppingbasketcodetest.Items.Dairy;
 import com.example.clareblackburne.shoppingbasketcodetest.Items.Drink;
 import com.example.clareblackburne.shoppingbasketcodetest.Items.FreshProduce;
@@ -25,6 +26,7 @@ public class TestCheckout {
     private Customer customer1;
     private Customer customer2;
     private Discount discount;
+    private CleaningProduct bleach;
 
     @Before
     public void before(){
@@ -34,6 +36,7 @@ public class TestCheckout {
         milk = new Dairy("milk", 1.20, 2, 10, true);
         eggs = new Dairy("eggs", 2.00, 6, 14, false);
         cauliflower = new FreshProduce("cauliflower", 1.00, 1, 10, true);
+        bleach = new CleaningProduct("bleach", 2.00, 5);
         shoppingBasket = new ShoppingBasket();
         customer1 = new Customer("Bob", 300, true);
         customer2 = new Customer("Sheila", 200, false);
@@ -61,6 +64,13 @@ public class TestCheckout {
         shoppingBasket.addItem(bread);
         assertEquals(11, checkout1.twoForOne(shoppingBasket), 0.1);
     }
+
+    @Test
+    public void testTwoForOneOnOneType(){
+        shoppingBasket.addItem(bread);
+        shoppingBasket.addItem(eggs);
+        assertEquals(23, checkout1.twoForOne(shoppingBasket, bread), 0.1);
+    }
     @Test
     public void testTwoForOneWithMultipleItems(){
         shoppingBasket.addItem(bread);
@@ -71,7 +81,7 @@ public class TestCheckout {
     @Test
     public void testApplyDiscountWhenLessThan20(){
         shoppingBasket.addItem(bread);
-        double result = checkout1.applyDiscountIfEligible(shoppingBasket);
+        double result = checkout1.applyDiscountIfBasketEligible(shoppingBasket);
         assertEquals(11, result, 0.1);
     }
 
@@ -79,13 +89,13 @@ public class TestCheckout {
     public void testApplyDiscountWhenMoreThan20(){
         Drink wine = new Drink("bottle of wine", 3.00, 22, true);
         shoppingBasket.addItem(wine);
-        double result = checkout1.applyDiscountIfEligible(shoppingBasket);
+        double result = checkout1.applyDiscountIfBasketEligible(shoppingBasket);
         assertEquals(29.7, result, 0.1);
     }
 
     @Test
     public void testApplyDiscountWhenZero(){
-        double result = checkout1.applyDiscountIfEligible(shoppingBasket);
+        double result = checkout1.applyDiscountIfBasketEligible(shoppingBasket);
         assertEquals(0, result, 0.1);
     }
 

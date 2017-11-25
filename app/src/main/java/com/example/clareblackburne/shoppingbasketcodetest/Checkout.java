@@ -18,7 +18,7 @@ public class Checkout {
 
     public double finalPrice (Customer customer, ShoppingBasket shoppingbasket){
 
-        double scannedPrice = this.applyDiscountIfEligible(shoppingbasket);
+        double scannedPrice = this.applyDiscountIfBasketEligible(shoppingbasket);
         double finalPrice = scannedPrice;
 
         if(customer.hasLoyaltyCard()){
@@ -34,6 +34,7 @@ public class Checkout {
         customer.setCash(customer.getCash() - this.finalPrice(customer, shoppingBasket));
     }
 
+//this is a method which applies two-for-one on all items in the basket
     public double twoForOne(ShoppingBasket shoppingBasket){
 
         double discount = 0;
@@ -56,8 +57,29 @@ public class Checkout {
     }
 
 
+//this is an overloaded method which allows the two-for-one to be applied to one type of item only
+    public double twoForOne(ShoppingBasket shoppingBasket, Offerable offerable){
+        double discount = 0;
+        double baseCost = shoppingBasket.calculateBaseCost();
 
-    public double applyDiscountIfEligible(ShoppingBasket shoppingBasket){
+        for(Item item : shoppingBasket.contents()){
+            if(item.getClass() == offerable.getClass()){
+                if(item.getQuantity() >= 2 && item.getQuantity() % 2 == 0 ){
+                    discount = ((item.getQuantity()/2) * item.getPrice());
+                    baseCost = baseCost - discount;
+                }
+                else if(item.getQuantity() >= 2 && item.getQuantity() % 2 ==1){
+                    discount = ((item.getQuantity() - 1)/2) * item.getPrice();
+                    baseCost = baseCost - discount;
+                }
+                else{
+                    return baseCost;
+                }
+            }
+            }return baseCost;
+    }
+
+    public double applyDiscountIfBasketEligible(ShoppingBasket shoppingBasket){
 
         double startPrice = this.twoForOne(shoppingBasket);
         double updatedPrice = startPrice;
@@ -69,7 +91,6 @@ public class Checkout {
         }
         return updatedPrice;
     }
-
 
 
 }

@@ -15,6 +15,7 @@ public class Discount {
         this.reduction = percentageReduction;
     }
 
+//Allows criteria for a discount to be changed
 
     public int getEligibleSizeOfBasket() {
         return eligibleSizeOfBasket;
