@@ -114,14 +114,14 @@ public class TestCheckout {
     }
 
     @Test
-    public void testChargeIneligibleCustomer(){
+    public void testChargeIneligibleCustomer() throws InsufficientAmountException {
         shoppingBasket.addItem(bread);
         checkout1.chargeCustomer(customer2, shoppingBasket);
         assertEquals(189, customer2.getCash(), 0.1);
     }
 
     @Test
-    public void testChargeEligibleCustomer(){
+    public void testChargeEligibleCustomer() throws InsufficientAmountException {
         shoppingBasket.addItem(bread);
         checkout1.chargeCustomer(customer1, shoppingBasket);
         assertEquals(289.22, customer1.getCash(), 0.1);

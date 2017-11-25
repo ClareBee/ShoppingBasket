@@ -30,8 +30,12 @@ public class Checkout {
         return finalPrice;
     }
 
-    public void chargeCustomer(Customer customer, ShoppingBasket shoppingBasket){
-        customer.setCash(customer.getCash() - this.finalPrice(customer, shoppingBasket));
+    public void chargeCustomer(Customer customer, ShoppingBasket shoppingBasket) throws InsufficientAmountException {
+        if (customer.getCash() > this.finalPrice(customer, shoppingBasket)) {
+            customer.setCash(customer.getCash() - this.finalPrice(customer, shoppingBasket));
+        } else {
+            throw new InsufficientAmountException("The customer doesn't have enough cash.");
+        }
     }
 
 //this is a method which applies two-for-one on all items in the basket

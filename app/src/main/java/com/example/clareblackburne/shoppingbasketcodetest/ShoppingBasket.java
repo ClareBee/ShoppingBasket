@@ -26,12 +26,20 @@ public class ShoppingBasket {
             contents.add(item);}
     }
 
-    public void removeItem(Item item){
-        if(item.getQuantity() > 1){
-            item.setQuantity(item.getQuantity() -1);
+    public void removeItem(Item item) throws InsufficientAmountException {
+        try{
+            if(item.getQuantity() > 1){
+                item.setQuantity(item.getQuantity() -1);
+             }
+            else if(item.getQuantity() == 1){
+                contents.remove(item);}
+            else{
+                throw new InsufficientAmountException();
+            }
         }
-        else{
-        contents.remove(item);}
+        catch(InsufficientAmountException e){
+            System.out.println("This item is not present in the basket");
+        }
     }
 
     public void empty(){

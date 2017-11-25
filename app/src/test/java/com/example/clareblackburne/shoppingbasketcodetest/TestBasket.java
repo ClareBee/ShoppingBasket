@@ -54,14 +54,14 @@ public class TestBasket {
     }
 
     @Test
-    public void testCanRemoveItem(){
+    public void testCanRemoveItem() throws InsufficientAmountException {
         shoppingBasket.addItem(milk);
         shoppingBasket.removeItem(milk);
         assertEquals(0, shoppingBasket.countContents());
     }
 
     @Test
-    public void testCanRemoveOneOfSpecificItem(){
+    public void testCanRemoveOneOfSpecificItem() throws InsufficientAmountException {
         shoppingBasket.addItem(milk);
         shoppingBasket.addItem(bread);
         shoppingBasket.removeItem(milk);
@@ -70,7 +70,7 @@ public class TestBasket {
     }
 
     @Test
-    public void testCanRemoveOneOfMultipleQuantity(){
+    public void testCanRemoveOneOfMultipleQuantity() throws InsufficientAmountException {
         shoppingBasket.addItem(bleach);
         shoppingBasket.removeItem(bleach);
         assertEquals(1, shoppingBasket.countContents());
